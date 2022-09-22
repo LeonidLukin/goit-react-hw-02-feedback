@@ -20,9 +20,14 @@ class App extends Component {
     }
   };
 
+  // countTotalFeedback = () => {
+  //   const { good, neutral, bad } = this.state;
+  //   return good + neutral + bad;
+  // };
+
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
+    // Это подходит только в том случае, если в будущем в наш STATE ничего не будет добавляться. 
+    return Object.values(this.state).reduce((previousValue, currentValue) => previousValue + currentValue, 0)
   };
 
   countPositiveFeedback = () => {
@@ -30,7 +35,7 @@ class App extends Component {
     const goodFeedback = this.state.good;
     let result = 0;
 
-    if (totalFeedback > 0) {
+    if (totalFeedback) {
       result = Math.ceil((goodFeedback / totalFeedback) * 100);
     }
 
